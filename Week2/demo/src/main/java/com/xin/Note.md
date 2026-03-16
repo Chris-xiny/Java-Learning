@@ -43,8 +43,14 @@ Note 5:
         5.简化型
         String s="abc";
     方法：
-    equals():比较两个字符串是否相等
-    equalsIgnoreCase():比较时无视大小写
+    boolean equals(String ):比较两个字符串是否相等
+    boolean equalsIgnoreCase(String):比较时无视大小写
+    boolean contains(String ):传入的串是否包含在本串中
+    boolean endsWith(String):是否以参数结尾
+    boolean startsWith(String):是否以参数开头
+    String toLowerCase():将字母转为小写
+    String toUpperCase():将字母转为大写
+    String trim():去掉字符串两端空格
 
 
 
