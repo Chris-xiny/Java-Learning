@@ -1,4 +1,4 @@
-package com.xin.DemoStringBuilder;
+package com.xin;
 
 import java.lang.StringBuilder;
 import java.util.Scanner;

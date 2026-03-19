@@ -25,7 +25,38 @@ Note 2:   Math类
         5.static int max(int,int):求最大值
         5.static int min(int,int):求最小值
 
+Note 3:   BigInteger类：数字形式的字符串
+        
+Note 4:   BigDecimal类
+    作用:解决float或double直接做运算出现的精度损失问题
+    构造方法: BigDecimal(String val)  //不推荐直接传double,而是数字格式的String值
+    方法:
+        BigDecimal add(BigDecimal val) this+val
+        BigDecimal subtract(BigDecimal val) 返回this-val
+        BigDecimal multiply(BigDecimal val) 返回this*val
+        BigDecimal divide(BigDecimal val) 返回this/val   //如果除不尽会报错
+        BigDecimal divide(BigDecimal division,int scale,int roundingMode) 返回this/division,其中scale是精确到小数点几位，roundingMode是取舍方法
+        double doubleValue() 返回值为this的double类对象
+
+Note 5:   Date日期类
+    构造方法:
+        Date()
+        Date(long time)传入毫秒，从时间原点1970年1月1日0时0分0秒开始算起,但北京时区差8小时，因此从8时0分0秒算起，1000ms=1s
+    方法:
+        void setTime(long time):与有参构造类似
+        long getTime():获取时间，返回毫秒值
+
+Note 6:   Calendar日历类
+    概述:抽象类
+    获取:静态方法 static Calendar getInstance();//注意，国外数月份从0开始，即0-11月，并且一周里周日为1
+    方法:
+        int get(int field):返回给定日历字段的值,如传入的field为Calendar.YEAR,则返回年
+        void set(int field,int value):将给定日历字段设置为指定值
+        void set(int year,int month,int date):设置年月日
+        void add(int field,int amout):根据日历规则,为给定的日历字段添加或减去指定的时间量
+        Date getTime():转为Date对象
 
 Daily:
     day1:String的其他方法
     day2:StringBuilder类与Math类
+    day4:Date类
