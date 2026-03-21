@@ -56,7 +56,21 @@ Note 6:   Calendar日历类
         void add(int field,int amout):根据日历规则,为给定的日历字段添加或减去指定的时间量
         Date getTime():转为Date对象
 
+Note 7:   SimpleDateFormat日期格式化类
+    构造:
+        SimpleDateFormat(String pattern) pattern:我们自己制定的日期格式,字母不能变,但可以改变连接符
+        y-年 M-月 d-日   H-时 m-分 s-秒
+        eg: "yyyy-MM-dd HH:mm:ss",日期格式为:2026-3-21 23:33:01
+    方法:
+        String format(Date date) 将date类对象转为指定格式的String对象
+        Date parse(String source) 将符合日期格式的字符串转为data对象,要处理ParseException异常
+
+Note 8: 其他日期类
+    (1)LocalData与LocalDataTime:一个表示不可变的年-月-日，后者表示年-月-日-时-分-秒
+        通过静态方法static LocalData/LocalDataTime now()获取两者对象,或通过static LocalData/LocalDataTime of(int,int,int...)设置指定日期时间获取对象
+    (2)
 Daily:
     day1:String的其他方法
     day2:StringBuilder类与Math类
     day4:Date类
+    day6:SimpleDateFormat类与其他日期类
