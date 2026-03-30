@@ -68,7 +68,41 @@ Note 7:   SimpleDateFormat日期格式化类
 Note 8: 其他日期类
     (1)LocalData与LocalDataTime:一个表示不可变的年-月-日，后者表示年-月-日-时-分-秒
         通过静态方法static LocalData/LocalDataTime now()获取两者对象,或通过static LocalData/LocalDataTime of(int,int,int...)设置指定日期时间获取对象
-    (2)
+
+Note 9:   包装类
+    1.基本数据类型都对应一个包装类，除了char与int对应的为Charactor与Integer，其余都是字母大写就好如:Byte、Float;
+    2.包装类带有一些静态方法可操作数据，并且对后面定义javabea与数据库连接时有用
+    3.包装类不可直接使用运算符，需转为基本类再使用运算符
+    4.如何互相转?
+        八种基本类型转成对应包装类int为例:
+            static Integer valueOf(int i)
+            static Integer valueOf(String s)
+        包装类转基本（拆箱）Integer为例:
+        int intValue();
+    5.包装类带有静态String直接转为对应基本类型除了char,方法int为例:
+        static int parseInt(String s);
+
+Note 10:   System类
+    1.系统相关类，是一个工具类
+    2.特点：
+        a.构造私有，不能用构造new对象
+        b.方法都是静态的
+    3.方法：
+        a.  static long currentTimeMills()  返回以毫秒为单位的当前时间，可以测效率
+        b.  static void exit(int status)  终止当前正在运行的虚拟机.一般传0
+       *c.  static void arraycopy(Object src,int srcPos,Object dest,int destPos,int length)  
+                srcPos:从原数组哪个索引开始复制     destPos:从目标数组哪个索引开始粘贴     length:复制多少个元素
+
+Note 11:   Arrays数组工具类
+    1.特点:
+        a.构造私有
+        b.方法静态
+    2.方法:
+        a.  static String toString(int[] a) 按照格式打印数组元素 [元素1,元素2,元素3......]
+        b.  static void sort(int[] a)   升序排序
+        c.  static int binarySearch(int[] a,int key)   二分查找,只能升序数组使用
+        d.  static int[] copyOf(int[] original,int newLength)   数组扩容
+
 Daily:
     day1:String的其他方法
     day2:StringBuilder类与Math类

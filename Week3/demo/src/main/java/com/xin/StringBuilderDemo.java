@@ -26,6 +26,6 @@ public class StringBuilderDemo {
         } else {
             System.out.println("反转后" + sb + "不是回文");
         }
-        sc.close();
+        //sc.close();
     }
 }
