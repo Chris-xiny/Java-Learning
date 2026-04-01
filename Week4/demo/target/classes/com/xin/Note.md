@@ -19,5 +19,11 @@ Note 1: 多线程
             2.重写run方法，在run方法中设置线程任务(即此线程要干的具体的事，具体执行的代码)
             3.创建自定义线程类对象
             4.调用Thread中的start方法,开启线程，jvm会自动调用run方法
+Note 2:   Thread类
+    1.方法:
+        void start()  开启线程,jvm会自动调用run方法
+        void run()   设置线程任务,是Thread重写接口Runnable的方法
+        String getName()   获取线程名
+        void setName()   设置线程名
 
         
