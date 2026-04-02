@@ -25,5 +25,8 @@ Note 2:   Thread类
         void run()   设置线程任务,是Thread重写接口Runnable的方法
         String getName()   获取线程名
         void setName()   设置线程名
+        static Thread currentThread()   返回对当前正在执行的线程对象的引用
+        static void sleep(long millis)   线程睡眠，超时醒来，传入毫秒值
+            sleep()函数在重写run方法式只能try_catch解决，不能抛异常，而在main函数中却可以，这是因为继承的Thread类在重写run方法时没有抛异常因此子类重写时也不能抛异常
 
         
