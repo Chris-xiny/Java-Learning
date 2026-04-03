@@ -13,13 +13,14 @@ Note 1: 多线程
         2.抢占式调度：多个线程轮流抢占CPU使用权，哪个线程先抢到哪个线程先执行，一般都是优先级高的先抢到使用权概率大
             java程序就是抢占性调度
     5.主线程：CPU和内存间开辟的专门为main方法服务的线程叫主线程
-    6.创建线程的方法(重点)***********
-        方法1： extends Thread
-            1.定义一个类继承Thread
-            2.重写run方法，在run方法中设置线程任务(即此线程要干的具体的事，具体执行的代码)
-            3.创建自定义线程类对象
-            4.调用Thread中的start方法,开启线程，jvm会自动调用run方法
-Note 2:   Thread类
+
+Note 2:   创建线程的方法1(重点)******继承Thread
+        1.定义一个类继承Thread
+        2.重写run方法，在run方法中设置线程任务(即此线程要干的具体的事，具体执行的代码)
+        3.创建自定义线程类对象
+        4.调用Thread中的start方法,开启线程，jvm会自动调用run方法
+
+Note 3:   Thread类
     1.方法:
         void start()  开启线程,jvm会自动调用run方法
         void run()   设置线程任务,是Thread重写接口Runnable的方法
@@ -28,5 +29,13 @@ Note 2:   Thread类
         static Thread currentThread()   返回对当前正在执行的线程对象的引用
         static void sleep(long millis)   线程睡眠，超时醒来，传入毫秒值
             sleep()函数在重写run方法式只能try_catch解决，不能抛异常，而在main函数中却可以，这是因为继承的Thread类在重写run方法时没有抛异常因此子类重写时也不能抛异常
+    2.不常用方法:
+        void setPriority()   设置线程优先级，抢占CPU几率增大(其实效果不是特别明显),默认为5,范围[1,10]
+        int getPriority()   获取线程优先级
+        void setDaemon()   设置为守护线程,当非守护线程执行完毕，守护线程就要结束
+        static void yield()   礼让线程，让当前线程让出CPU使用权,可以尽可能让线程交替执行
+        void join()   插入线程或者叫插队线程
 
+Note 4:   创建线程的方法2(重点)******实现Runnable接口
+    
         
