@@ -37,5 +37,8 @@ Note 3:   Thread类
         void join()   插入线程或者叫插队线程
 
 Note 4:   创建线程的方法2(重点)******实现Runnable接口
-    
+    1.创建类,实现Runnable接口
+    2.重写run()方法，设置线程任务
+    3.利用Thread类的构造方法:Thread(Runnable target),创建Thread对象(线程对象),将自定义的类当参数传递到Thread构造中
+    4.调用Thread中的start方法
         
