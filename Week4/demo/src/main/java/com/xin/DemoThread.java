@@ -17,6 +17,16 @@ public class DemoThread extends Thread{//第一种创建线程方法--继承Thre
         RunnableThread rt=new RunnableThread();
         Thread t=new Thread(rt);
         t.start();
+
+        //第三种方法创建线程--匿名内部类创建线程
+        new Thread(new Runnable(){
+            @Override
+            public void run(){
+                for (int i = 0; i < 5; i++) {
+                    System.out.println("第三种方法创建的子线程遍历......"+i);
+            }
+            }
+        }).start();
         
         //与主线程抢占
         for (int i = 0; i <5; i++) {
