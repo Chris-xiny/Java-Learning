@@ -27,4 +27,20 @@ Note 2:   死锁(有可能出现在锁嵌套时)
 Note 3:   线程的状态
    ![alt text](image-1.png)
    ![alt text](image.png)
-   注意:基本数据类型不能作为锁对象，因为他们没有继承Object类，而wait()与notify()方法定义在Object类中
+   注意:基本数据类型不能作为锁对象(引用数据类型)，因为他们没有继承Object类，而锁需要支持wait()与notify()等方法，它们定义在Object类中
+
+Note 4: 多线程
+    1.等待唤醒机制
+        方法:
+            void wait()
+            void notify()
+            void notifyAll()
+        案例:一个人包包子，一个人吃包子，但是不能连续包和吃包子。(包一个吃一个)
+        问题1:怎么表示包包子和吃包子?   
+            a.包包子:count++   b.吃包子:输出count.
+        问题2:怎么证明有没有包子?    
+            flag=true 表示有包子，false为没有包子.
+        问题3:如何防止生产到一半，CPU切换到吃包子的线程?
+            加锁.
+        问题4:如何解决即使加锁也不能保证包一个吃一个?
+            使用wait()与notify()方法.

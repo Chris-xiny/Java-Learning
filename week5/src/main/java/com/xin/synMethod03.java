@@ -1,6 +1,6 @@
 package com.xin;
 
-public class Method03 implements Runnable {
+public class synMethod03 implements Runnable {
     static int ticket=100;//静态方法不能直接访问非静态,需将ticket变为静态变量
     Object syn=new Object();
     @Override
@@ -21,7 +21,7 @@ public class Method03 implements Runnable {
         }
     }
     public static void main(String[] args) {
-        Method01 myticket=new Method01();
+        synMethod01 myticket=new synMethod01();
         Thread t1=new Thread(myticket,"张三");
         Thread t2=new Thread(myticket,"李四");
         Thread t3=new Thread(myticket,"王五");

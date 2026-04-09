@@ -1,10 +1,10 @@
 package com.xin;
 
-public class DieLockDemo implements Runnable{
+public class DeadLockDemo implements Runnable{
     static Object LockA=new Object();
     static Object LockB=new Object();
     boolean flag;
-    DieLockDemo(boolean f){
+    DeadLockDemo(boolean f){
         flag=f;
     }
     @Override
@@ -27,8 +27,8 @@ public class DieLockDemo implements Runnable{
     }
 
     public static void main(String[] args) {
-        DieLockDemo DieLock1=new DieLockDemo(true);
-        DieLockDemo DieLock2=new DieLockDemo(false);
+        DeadLockDemo DieLock1=new DeadLockDemo(true);
+        DeadLockDemo DieLock2=new DeadLockDemo(false);
 
         new Thread(DieLock1).start();
         new Thread(DieLock2).start();
