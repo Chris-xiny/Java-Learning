@@ -20,3 +20,14 @@ Note 3: Collection接口
         b.<E>:泛型，决定了该集合能储存什么数据类型，只能写引用数据类型，不写默认Object类型，可以储存任意类型
     3.常用方法:
         ![alt text](note3.png)
+
+Note: 迭代器
+    1.Iterator接口
+    2.主要作用:遍历集合
+    3.获取:Collection中的方法:
+        Iterator<E> iterator();
+    4.方法:
+        boolean hasNext():判断集合中有没有下一个元素
+        E next():获取下一个元素    小细节:最好不要同时next多个元素，除非保证每个next都有检查过hasNext,
+                                  不然可能超出集合范围,触发NoSuchElementsException异常
+

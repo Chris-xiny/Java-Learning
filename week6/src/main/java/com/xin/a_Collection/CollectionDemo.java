@@ -1,4 +1,4 @@
-package com.xin;
+package com.xin.a_Collection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
