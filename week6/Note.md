@@ -21,7 +21,7 @@ Note 3: Collection接口
     3.常用方法:
         ![alt text](note3.png)
 
-Note 4: 迭代器
+Note 4: 迭代器*****
     1.Iterator接口
     2.主要作用:遍历集合
     3.获取:Collection中的方法:
@@ -53,9 +53,9 @@ Note 5: 数据结构
             1.一个节点分为三个部分:指针域(上一个节点地址)、数据域(存数据)、指针域(下一个节点地址)
             2.特点:前后节点地址都保存
 
-Note 6: List接口
+Note 6: List接口*****
     1.是单列集合顶级接口Collection接口的子接口
-    2.常见的实现类: ArrayList LinkedList Vector
+    2.常见的实现类: ArrayList LinkedList Vector(太老不多了解)
     一、ArrayList类
         1.概述:是List接口的实现类
         2.特点:
@@ -77,7 +77,38 @@ Note 6: List接口
         以后开发中注意:
         ![alt text](note6_1.png)
     二、LinkedList类
-    三、Vector类
+    1.概述:List的实现类
+    2.特点:
+        a.元素有序:什么顺序存，就什么顺序取
+        b.元素可重复
+        c.有索引:只是有操作索引的方法,并不是本质上有索引
+        d.线程不安全
+    3.数据结构:双向链表
+    4.常用方法:有大量直接操作首位元素的方法
+        public void addFirst(E e):将指定元素插入此列表的开头。
+        public void addLast(E e):将指定元素添加到此列表的结尾。
+        public E getFirst():返回此列表的第一个元素。
+        public E getLast():返回此列表的最后一个元素。
+        public E removeFirst():移除并返回此列表的第一个元素。
+        public E removeLast():移除并返回此列表的最后一个元素。
+        public E pop():从此列表所表示的堆栈处弹出一个元素。底层直接return removeFirst();
+        public void push(E e):将元素推入此列表所表示的堆栈。底层直接return addFirst();
+        public boolean isEmpty():如果列表没有元素,则返回true.
+    5.底层源码分析:
+    ![alt text](note6_2.png)
+    ![alt text](note6_3.png)
+    ![alt text](note6_4.png)
+
+Note 7: 增强for*****
+    1.作用遍历数组或集合
+    2.使用:
+        for(变量类型 变量名: 要遍历的数组名或集合名){
+            变量名就是代表的遍历的每一个元素
+        }//实例见DemoLinkedlist.java中最后一种遍历方式
+    3.快捷键:集合(数组)名.for
+    4.注意:
+        a.遍历集合时,增强for底层实现原理是迭代器，所以遍历过程中不能随意修改集合长度，否则会出现并发修改异常
+        b.遍历数组时,增强for底层实现原理是普通for
 
 
 
