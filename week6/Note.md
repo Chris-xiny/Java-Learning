@@ -110,6 +110,20 @@ Note 7: 增强for*****
         a.遍历集合时,增强for底层实现原理是迭代器，所以遍历过程中不能随意修改集合长度，否则会出现并发修改异常
         b.遍历数组时,增强for底层实现原理是普通for
 
+Note 8: Collections集合工具类
+    1.概述：集合工具类
+    2.特点：
+        a.构造私有
+        b.方法都是静态的
+    3.使用:都是类名直接调用
+    4.方法:
+        static <T> bollean addAll()(Collection<? super T> c, T... elements)     批量添加元素
+        static void shuffle(List<?> list)       将集合中的元素打乱
+        static <T> void sort(List<T> list)      将集合中的元素按照默认规则排序->按照第一个字符的ASXII码表
+        static <T> void sort(List<T> list,Comparator<? super T> c)      将集合中的元素按照指定规则排序
+
+    扩展Arrays中的一个静态方法
+        static <T> List<T> asList(T...a)        直接将指定元素转存到list集合中
 
 
 
