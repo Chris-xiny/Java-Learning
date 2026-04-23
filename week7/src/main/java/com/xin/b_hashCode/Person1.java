@@ -2,7 +2,7 @@ package com.xin.b_hashCode;
 
 public class Person1 {
     String name;
-    int age;
+    Integer age;
     Person1(){
 
     }
