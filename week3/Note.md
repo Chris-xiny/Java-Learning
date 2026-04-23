@@ -1,3 +1,5 @@
+
+-------------第二章:StringBuilder类-------------
 Note 1:   StringBuilder类
     StringBuilder类:可变的字符序列，此类提供了与StringBuffer兼容的一套API，但是不保证同步(线程不安全但效率高)
     作用:主要是字符串拼接
@@ -11,6 +13,9 @@ Note 1:   StringBuilder类
         2.StringBuilder reverse():字符串反转
         3.String toString():转为String类型
 
+                                    十五章.API：数学相关类、日期相关类、包装类、工具类
+=============================================================================================
+-------------第一章:数学相关类-------------
 Note 2:   Math类    
     Math类:数学工具类，主要用于数学运算
     特点:   (工具类一般都有这几个特点，方便使用)
@@ -38,6 +43,8 @@ Note 4:   BigDecimal类
         BigDecimal divide(BigDecimal division,int scale,int roundingMode) 返回this/division,其中scale是精确到小数点几位，roundingMode是取舍方法
         double doubleValue() 返回值为this的double类对象
 
+
+-------------第二章:日期相关类-------------
 Note 5:   Date日期类
     构造方法:
         Date()
@@ -69,6 +76,8 @@ Note 8: 其他日期类
     (1)LocalData与LocalDataTime:一个表示不可变的年-月-日，后者表示年-月-日-时-分-秒
         通过静态方法static LocalData/LocalDataTime now()获取两者对象,或通过static LocalData/LocalDataTime of(int,int,int...)设置指定日期时间获取对象
 
+
+-------------第三章:包装类-------------
 Note 9:   包装类
     1.基本数据类型都对应一个包装类，除了char与int对应的为Charactor与Integer，其余都是字母大写就好如:Byte、Float;
     2.包装类带有一些静态方法可操作数据，并且对后面定义javabea与数据库连接时有用
@@ -82,6 +91,8 @@ Note 9:   包装类
     5.包装类带有静态String直接转为对应基本类型除了char,方法int为例:
         static int parseInt(String s);
 
+
+-------------第四章:工具类-------------
 Note 10:   System类
     1.系统相关类，是一个工具类
     2.特点：

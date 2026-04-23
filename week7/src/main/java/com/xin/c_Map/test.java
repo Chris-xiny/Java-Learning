@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class test {
     public static void main(String[] args) {
+        //演示Map的去重复过程
         HashMap<Person,String> map=new HashMap<>();
         map.put(new Person("涛哥",18),"河北省");
         map.put(new Person("涛哥",18),"海南省");//自定义类Person没有重写hashCode与equals方法，不能去重保证键唯一

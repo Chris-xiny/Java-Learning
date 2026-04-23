@@ -1,3 +1,5 @@
+
+-------------第三章:红黑树-------------
 Note 1:  红黑树
     1.集合加入红黑树的目的:提高查询效率
         HashSet集合:
@@ -5,6 +7,9 @@ Note 1:  红黑树
             哈希表=数组+链表+红黑树
     2.什么是红黑树
     ![alt text](note1.png)
+
+
+-------------第四章:Set集合-------------
 Note 2:  Set接口******
     1.Set接口并没有对Collection接口进行功能上的扩充,而且所有的Set集合底层都是依靠Map实现,没有自己的东西,相当于傀儡
     2.Set与Map密切相关的,Map的遍历需要先变成单列集合，只能变成Set集合
@@ -57,6 +62,11 @@ Note 6:  Set集合的存储去重复过程
         如果不重写hashCode()与equals()方法，默认调用的是Object中的，不同的对象，哈希值肯定不一样,equals比较的对象地址值也不一样,
         所以此时即使对象的属性值一样也不能去重复
 
+
+
+                二十章Map集合:Map集合_TreeSet_TreeMap_HashTable与Vector集合_Properties集合(属性集)_集合嵌套_哈希表结构储存过程
+===============================================================================================================================
+-------------第一章:Map集合-------------
 Note 7:   双列集合
     1.双列集合框架:
         ![alt text](note7.png)
@@ -83,9 +93,7 @@ Note 9:   HashMap的介绍和使用
     5.遍历方式:
         Set<K> keySet()->将Map中的key获取出来，转存到Set集合中
         Set<Map.Entry<K,V>> entrySet()->获取Map集合中的键值对，转存到set集合中
-
-
-    
+ 
 Note 10:LinkedHashMap
     1.概述:LinkedHashMap extends HashMap
     2.特点:
@@ -96,3 +104,7 @@ Note 10:LinkedHashMap
         e.可以存null键null值
     3.数据结构:哈希表+双向链表
     4.方法:与HashMap一样
+
+Note 11:Map存储自定义对象时如何去重复?
+    如果key为自定义类型,去重复的话,重写hashCode与equals()方法,去重复过程和Set集合一样
+    因为Set集合的元素到了底层都是保存到map的key位置上.
