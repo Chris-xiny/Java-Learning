@@ -105,6 +105,13 @@ Note 10:LinkedHashMap
     3.数据结构:哈希表+双向链表
     4.方法:与HashMap一样
 
-Note 11:Map存储自定义对象时如何去重复?
+Note 11:Map存储自定义对象时如何去重复，去重复过程是什么?
     如果key为自定义类型,去重复的话,重写hashCode与equals()方法,去重复过程和Set集合一样
     因为Set集合的元素到了底层都是保存到map的key位置上.
+    ![alt text](note11.png)
+
+Map集合练习一:
+    输入字符串，统计字符串包含字符数量
+
+Map集合练习二:
+    斗地主
