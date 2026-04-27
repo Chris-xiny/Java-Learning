@@ -66,7 +66,7 @@ Note 6:  Set集合的存储去重复过程
 
                 二十章Map集合:Map集合_TreeSet_TreeMap_HashTable与Vector集合_Properties集合(属性集)_集合嵌套_哈希表结构储存过程
 ===============================================================================================================================
--------------第一章:Map集合-------------
+-------------第一章:Map集合-------------********************
 Note 7:   双列集合
     1.双列集合框架:
         ![alt text](note7.png)
@@ -143,5 +143,90 @@ Note 13:  TreeSet(单列集合)
         TreeSet(Comparator<? super E> comparator)  构造一个新的空TreeSet,他根据指定比较器进行排序
 
 -------------第四章:TreeMap-------------
+Note 14:  TreeMap
+1.概述:TreeMap是Map的实现类
+    2.特点:
+        a.可对元素进行排序
+        b.无索引
+        c.不能存null
+        d.线程不安全
+        e.元素唯一
+    3.数据结构:红黑树
+    4.构造:
+        TreeMap()                                  使用键的自然顺序构造一个新的、空的树映射->ASCII
+        TreeMap(Comparator<? super E> comparator)  构造一个新的、空的树映射,该映射根据给定比较器进行排序
 
+
+-------------第五章:Hashtable和Vector集合(了解)-------------
+Note 15:  Hashtable集合
+    1.概述:Hashtable是Map的实现类
+    2.特点:
+        a.key唯一,value可重复
+        b.无索引
+        c.无序
+        d.线程安全
+        e.不能存null键值
+    3.数据结构:哈希表
+    4.用法:与HashMap一样
+    5.与HashMap的区别:
+        a.相同点:元素无序,无索引，key唯一
+        b.不同点:HashMap线程不安全
+                HashMap可以存储null键值
+
+Note 16:  Vector
+    1.概述:Vector是List接口的实现类
+    2.特点:
+        a.元素有序
+        b.有索引
+        c.元素可重复
+        d.线程安全
+    3.数据结构:数组
+    4.Vector底层源码
+    a.构造方法
+    ![alt text](note16_1.png)
+    b.add超出容量时扩容过程
+    ![alt text](note16_2.png)
+    c.有参构造以及扩容
+    ![alt text](note16_3.png)
+    5.源码分析总结:
+        a.如果是无参构造,默认数组初始长度10,超出后自动扩容为两倍
+        b.如果是有参构造,指定长度与容量增量,超出后自动扩容为数组原长度+容量增量
+
+
+-------------第六章:Properties属性集-------------********************
+Note 17:  Properties
+    1.概述:Properties继承自Hashtable
+    2.特点:
+        a.key唯一,value可重复
+        b.无索引
+        c.无序
+        d.线程安全
+        e.不能存null键值
+        f.Properties的key和value默认类型为String
+    3.数据结构:哈希表
+    4.方法:
+    Object setProperty(String key,String value)     存键值对
+    String getProperty(String key)                  根据key获取value
+    Set<String> stringPropertyNames()               获取所有key，存到set集合中，类似于keySet方法
+    void load(InputStream inStream)                 将流中的数据加载到Properties集合中(IO部分再详细说明)
+
+-------------第七章:集合嵌套-------------
+Note 18:  List嵌套List
+    需求:创建两个List集合,每个集合中分别存储一些字符串,将两个集合存储到第三个集合中
+
+Note 19:  List嵌套Map
+    需求:a班级有第三名同学，学号和姓名分别为：1=张三，2=李四，3=王五，b班有三名同学，学号和姓名分别为：1=黄晓明，2=杨颖，3=刘德华，
+    请将同学的信息以键值对的形式存储到2个Map集合中，在将2个Map集合存储到List集合中
+
+Note 19:  Map嵌套Map
+    需求:
+        JavaSE 班级 Map
+        键（学号） → 值（姓名）
+            1 → 张三
+            2 → 李四
+
+        JavaEE 班级 Map
+        键（学号） → 值（姓名）
+            1 → 王五
+            2 → 赵六
 
