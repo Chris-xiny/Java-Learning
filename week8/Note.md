@@ -18,7 +18,21 @@ Note 1:File流
         但有个问题,这样写只在Windows生效如果Linux呢?我们可以这样:
             String path="E:"+File.separator+"Code"+File.separator+"Java"......+File.separator+"Note.md";
     4.File的构造方法:    
-
+        File(String parent,String child)    根据所填写的路径创建File对象
+            parent:父路径           child:子路径
+        File(File parent,String child)      根据所填写的路径创建File对象
+            parent:父路径,是一个File对象           child:子路径
+        File(String pathname)               根据所填写的路径创建File对象
+            pathname:直接指定路径
+    5.File的常用方法:
+        a.获取方法:
+            String getAbsolutePath()    :获取File的绝对路径(带盘符的路径)  //如果没有盘符,他会在前面自动补充当前项目的路径
+            String getPath()            :获取的是封装路径(new对象写的啥路径就是什么路径)
+            String getName()            :获取的是文件或文件夹的名称
+            long length()               :获取的是文件的长度(文件的字节数)
+        b.创建方法:
+            boolean createNewFile
+            
             
 
 -------------第二章:字节流-------------*****************

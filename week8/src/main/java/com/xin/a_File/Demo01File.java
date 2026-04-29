@@ -2,7 +2,7 @@ package com.xin.a_File;
 
 import java.io.File;
 
-public class DemoFile {
+public class Demo01File {
     public static void main(String[] args) {
         //static String pathSeparator:与系统有关的路径分隔符,为了方便,他被表示为一个字符串    ;
         System.out.println(File.pathSeparator);
