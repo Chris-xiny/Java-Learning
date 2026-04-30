@@ -2,7 +2,7 @@ package com.xin.a_File;
 
 import java.io.File;
 
-public class Demo02File {
+public class Method_Constructors {
     public static void main(String[] args) {
     // File(String parent,String child)    根据所填写的路径创建File对象
     //parent:父路径   child:子路径
