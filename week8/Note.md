@@ -103,5 +103,12 @@ Note 3: FileOutputStream
         void write(byte[] b)   一次性将b数组写入                    
         void write(byte[] b, int off,int len)   从b数组的off索引开始写len个
         void close()        关闭输出流
-
+    6.字节流的扩写功能:
+        a.FileOutputStream(String name,boolean append)    
+            append->为true时,可以实现写入文件时不用覆盖旧文件，而是直接从后面续写
+        b.换行符:
+            windows: "\r\n" ->占两个字节 或者  "\n"也行
+            Linux:   "\n"
+            mac os:  "\r"
+    
 -------------第三章:字符流-------------*****************
