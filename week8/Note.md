@@ -77,7 +77,31 @@ Note 2:IO流介绍以及输入输出以及流向的介绍
     3.作用:
         a.之前学的集合与数组存储的数据是临时数据(保存在内存当中,代码运行完就消失),而IO流可以将数据存储到硬盘中
         b.将来传输数据,也必然用到输入与输出
-    
+    4.IO的流向
+        参照物:内存
+        Output:从内存里出去
+        Input:进到内存里
+    5.IO流分类
+        a.字节流:万能流,因为一切皆字节
+            字节输出流:OutputStream 抽象类
+            字节输入流:InputStream 抽象类
+        b.字符流:专门操作文本文档
+            字符输出流:Writer 抽象类
+            字符输入流:Reader 抽象类
 
+Note 3: FileOutputStream
+    1.概述:字节输出流OutputStream的子类FileOutputStream
+    2.作用:向硬盘写数据
+    3.构造
+        FileOutputStream(File file)
+        FileOutputStream(String name)
+    4.特点:
+        a.指定的文件如果没有,输出流会自动创建一个
+        b.每执行一次,默认都会创建一个新的文件,覆盖老文件
+    5.方法:
+        void write(int b)       一次写一个字节
+        void write(byte[] b)   一次性将b数组写入                    
+        void write(byte[] b, int off,int len)   从b数组的off索引开始写len个
+        void close()        关闭输出流
 
 -------------第三章:字符流-------------*****************
