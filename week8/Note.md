@@ -110,5 +110,16 @@ Note 3: FileOutputStream
             windows: "\r\n" ->占两个字节 或者  "\n"也行
             Linux:   "\n"
             mac os:  "\r"
-    
+
+Note 4: FileInputStream
+    1.概述:字节输入流InputStream的子类FileOutputStream
+    2.作用:读数据,从硬盘读数据
+    3.构造
+        FileInputStream(File file)
+        FileInputStream(String name)
+    4.方法:
+        int write(int b)       一次读一个字节,返回的是读取的字节;文件到达了末尾,返回-1
+        int write(byte[] b)   一次性读取一个数组,返回的是读取的字节个数 ，到达文件末尾依旧返回-1              
+        int write(byte[] b, int off,int len)   从b数组的off索引开始读len个,返回的是读取的字节个数
+        void close()        关闭输入流
 -------------第三章:字符流-------------*****************
