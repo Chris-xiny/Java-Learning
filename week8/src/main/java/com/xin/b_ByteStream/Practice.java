@@ -18,6 +18,7 @@ public class Practice {
         byte[] bytes=new byte[1024];
         while((len=fin.read(bytes))!=-1){
             fout.write(bytes,0,len);
+
         }
     }
 }

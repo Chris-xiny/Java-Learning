@@ -16,14 +16,14 @@ public class FileOutputStream01 {
     }
 
     private static void append() throws IOException {
-        FileOutputStream fout=new FileOutputStream("E:\\Code\\Java\\Intern\\week8\\src\\main\\java\\com\\xin\\b_ByteStream\\1.txt",true);
+        FileOutputStream fout=new FileOutputStream("E:\\Code\\Java\\Intern\\week8\\src\\main\\java\\com\\xin\\1.txt",true);
         byte[] bytes = "\n我在追加字符".getBytes();
         fout.write(bytes);
         fout.close();
     }
 
     private static void method01() throws IOException{
-        FileOutputStream fout=new FileOutputStream("E:\\Code\\Java\\Intern\\week8\\src\\main\\java\\com\\xin\\b_ByteStream\\1.txt");
+        FileOutputStream fout=new FileOutputStream("E:\\Code\\Java\\Intern\\week8\\src\\main\\java\\com\\xin\\1.txt");
         // void write(int b)       一次写一个字节
         fout.write(97);            //97---ASCII:a
         // void write(byte[] b)   一次性将b数组写入 

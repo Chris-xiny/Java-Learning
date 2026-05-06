@@ -64,7 +64,7 @@ Note 1:File流
             口诀:哪个路径是参照路径,哪个路径就可以省略不写,剩下的就是在idea中的相对路径写法
                 idea中的参照路径：当前projrct的绝对路径
 
--------------第二章:字节流-------------*****************
+-------------第二章:IO流-------------*****************
 Note 2:IO流介绍以及输入输出以及流向的介绍
     1.单词:
         Output:输出
@@ -89,6 +89,7 @@ Note 2:IO流介绍以及输入输出以及流向的介绍
             字符输出流:Writer 抽象类
             字符输入流:Reader 抽象类
 
+-------------第三章:字节流-------------*****************
 Note 3: FileOutputStream
     1.概述:字节输出流OutputStream的子类FileOutputStream
     2.作用:向硬盘写数据
@@ -118,8 +119,56 @@ Note 4: FileInputStream
         FileInputStream(File file)
         FileInputStream(String name)
     4.方法:
-        int write(int b)       一次读一个字节,返回的是读取的字节;文件到达了末尾,返回-1
-        int write(byte[] b)   一次性读取一个数组,返回的是读取的字节个数 ，到达文件末尾依旧返回-1              
-        int write(byte[] b, int off,int len)   从b数组的off索引开始读len个,返回的是读取的字节个数
+        int read(int b)       一次读一个字节,返回的是读取的字节;文件到达了末尾,返回-1
+        int read(byte[] b)   一次性读取一个数组,返回的是读取的字节个数 ，到达文件末尾依旧返回-1              
+        int read(byte[] b, int off,int len)   从b数组的off索引开始读len个,返回的是读取的字节个数
         void close()        关闭输入流
--------------第三章:字符流-------------*****************
+
+-------------第四章:字符流-------------*****************
+字节流读取中文问题: GBK一个汉字两字节，而UTF-8占3字节，字节流边读边看可能存在问题，因此更侧重于文件复制而非边读边看
+解决:按照字节去操作文档可能会乱码(可能字节数对不上)，因此按照字符数来操作,但是注意编码也要一致
+
+Note 5: FileReader
+字符流专门操作文本文档，但复制一定不要用字符流而是用字节流
+    1.字符输入流:Reader(抽象类),其子类就是FileReader
+    2.作用:将文本内容读取到内存
+    3.构造:
+        FileReader(File file)
+        FileReader(String fileName)
+    4.方法:
+        int read(int b)       一次读一个字符,返回的是读取的字符对应ASCII;文件到达了末尾,返回-1
+        int read(char[] cbuf)   一次性读取一个字符数组,返回的是读取的字符个数 ，到达文件末尾依旧返回-1              
+        int read(char[] cbuf, int off,int len)   从b字符数组的off索引开始读len个,返回的是读取的字符个数
+        void close();       关闭输入流
+
+Note 6: FileWriter
+    1.字符输出流:Writer(抽象类),其子类就是FileWriter
+    2.作用:将数据写到文件中
+    3.构造:
+        FileWriter(File file)
+        FileWriter(String fileName)
+        FileWriter(String fileName,boolean append)
+            append->为true时,可以实现写入文件时不用覆盖旧文件，而是直接从后面续写
+    4.方法:
+        void write(int b)       一次写一个字符
+        void write(char[] cbuf)   一次性将字符数组写入                    
+        void write(char[] cbuf, int off,int len)   从字符数组的off索引开始写len个
+        void write(String str)      直接写入一个字符串
+        void flush()        刷新流(字符输出流较为特殊，自带一个缓冲区，我们写入的字符都临时存在缓冲区中，需刷新才能真正写入硬盘)
+        void close()        关闭输出流(自带调用flush方法)
+
+-------------第五章:IO异常处理方式-------------
+Note 7:IO异常处理方式
+    1.JDK7之前处理方式见ResolveIOExp.JDK7before.java
+    2.JDK7开始及之后处理方式见ResolveIOExp.JDK7after.java
+        a.格式:
+            try(IO对象){ //括号中可new多个对象,用分号隔开
+                可能出现异常的代码
+            }catch(异常类型 对象名){
+                处理异常
+            }
+        b.注意:以上IO对象会自动调用close关流
+    3.另外值得一提的一个小优化是从JDK9开始，try-with-resources 变得更加灵活。如果资源变量已经在外部使用
+    final修饰或者实际是final的，你可以直接在try语句的括号()里引用它，无需再重新声明如 try(fw;fr){}   //前提是fw与fr是final的
+    
+
