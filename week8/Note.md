@@ -252,7 +252,7 @@ Note 11:序列化流与反序列化流
         a.问题描述:序列化之后，修改源码，修改后没有重新序列化，直接反序列化，就会出现序列号冲突问题:InvalidClassException
             ![note11_7.png](note11_7.png)
             解决:将序列号定死即可，后面不论怎么修改源码，序列号都是这一个
-            方法:在被序列化的对象加上一个public static final long serialVersionUID 的变量并
+            方法:在被序列化的对象加上一个private static final long serialVersionUID 的变量并
                 为其赋值只要这个值不变，JAVA就会认为类的版本一致
         b.问题描述:循环读取的次数和存储对象的个数不对应，就会出现EOFException
             解决:直接序列化一个对象的集合而非多个对象，于是反序列化一个集合就可以通过集合取出所有对象

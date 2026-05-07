@@ -3,7 +3,7 @@ package com.xin.g_SerializationStream;
 import java.io.Serializable;
 
 public class Hero implements Serializable {//实现序列化接口
-    public static final long serialVersionUID =123456L;//固定序列号，只要这个值不变，JAVA就会认为类的版本一致
+    private static final long serialVersionUID =123456L;//固定序列号，只要这个值不变，JAVA就会认为类的版本一致
     private String name;
     private Integer level;
     private String sex;//transient修饰的对象不被序列化
