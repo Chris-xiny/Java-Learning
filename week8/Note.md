@@ -13,9 +13,8 @@ Note 1:File流
     3.File的静态成员
         static String pathSeparator:与系统有关的路径分隔符,为了方便,他被表示为一个字符串    ;
         static String separator:与系统有关的默认名称分隔符,为了方便,他被表示为一个字符串    \ /
-
-        在往后Java开发中路径可能会这样写: String path="E:\\Code\\Java\\Intern\\week8\\Note.md";
-        但有个问题,这样写只在Windows生效如果Linux呢?我们可以这样:
+            在往后Java开发中路径可能会这样写: String path="E:\\Code\\Java\\Intern\\week8\\Note.md";
+            但有个问题,这样写只在Windows生效如果Linux呢?我们可以这样:
             String path="E:"+File.separator+"Code"+File.separator+"Java"......+File.separator+"Note.md";
     4.File的构造方法:    
         File(String parent,String child)    根据所填写的路径创建File对象
@@ -69,7 +68,6 @@ Note 2:IO流介绍以及输入输出以及流向的介绍
     1.单词:
         Output:输出
         Input:输入
-
         write:写数据
         read:读数据
     2.IO流:
@@ -125,8 +123,8 @@ Note 4: FileInputStream
         void close()        关闭输入流
 
 -------------第四章:字符流-------------*****************
-字节流读取中文问题: GBK一个汉字两字节，而UTF-8占3字节，字节流边读边看可能存在问题，因此更侧重于文件复制而非边读边看
-解决:按照字节去操作文档可能会乱码(可能字节数对不上)，因此按照字符数来操作,但是注意编码也要一致
+    字节流读取中文问题: GBK一个汉字两字节，而UTF-8占3字节，字节流边读边看可能存在问题，因此更侧重于文件复制而非边读边看
+    解决:按照字节去操作文档可能会乱码(可能字节数对不上)，因此按照字符数来操作,但是注意编码也要一致
 
 Note 5: FileReader
 字符流专门操作文本文档，但复制一定不要用字符流而是用字节流
@@ -170,5 +168,110 @@ Note 7:IO异常处理方式
         b.注意:以上IO对象会自动调用close关流
     3.另外值得一提的一个小优化是从JDK9开始，try-with-resources 变得更加灵活。如果资源变量已经在外部使用
     final修饰或者实际是final的，你可以直接在try语句的括号()里引用它，无需再重新声明如 try(fw;fr){}   //前提是fw与fr是final的
-    
+
+-------------第六章:字节字符缓冲流-------------
+    为啥要学缓冲流:
+        之前所写的FileOutputStream, FileInputStream, FileReader, FileWriter 这都叫做基本类，其中FileInputStream
+        和FileOutputStream的读写方法都是本地方法（方法声明上带native），本地方法是和系统以及硬盘打交道的，也就是说这两个对象
+        的读和写都是在硬盘之间进行读写的，效率不高；缓冲流中底层带一个长度为8192的数组（缓冲区），此时读和写都是在内存中完成的（
+        在缓冲区之间完成），内存中的读写效率非常高.
+        使用之前需要将基本流包装成缓冲流，本质就是new对象时传递基本流
+
+Note 8:字节缓冲流
+    a.BufferedOutputStream:字节缓冲输出流
+        1.构造:BufferedOutputStream(OutputStream out)
+        2.使用:和FileOutputStream一样
+    a.BufferedInputStream:字节缓冲输入流
+        1.构造:BufferedInputStream(InputStream in)
+        2.使用:和FileInputStream一样
+    细节:![note8.png](note8.png)
+Note 9:字符缓冲流
+    a.我们知道字符流的基本流的底层是有缓冲区的，所以效率差别不明显，但是不代表字符缓冲流不重要，因为我们要主要学习它的两个特有方法
+    b. BufferedWriter:字符缓冲输出流
+        1.构造:BufferedWriter(Writer w)
+        2.使用:和FileWriter一样
+        3.特有方法:
+            newLine()
+    c.BufferedReader:字符缓冲输入流
+        1.构造:BufferedReader(Writer w)
+        2.使用:和FileReader一样
+        3.特有方法:
+            String readLine()   一次读一行，如果读到结束标记，返回的是null,读取很方便
+
+-------------第七章:转换流、序列化流、打印流_PrintStream(了解)-------------
+Note 10:转换流
+    介绍:
+        字符编码(Character Encoding):就是一套自然语言的字符与二进制数之间的对应规则.
+        编码:按照某则规则将字符存储在计算机中
+        解码:按照某种规则将计算机中的二进制数解析出来
+        乱码:编码与解码规则不同不兼容时出现的乱码现象
+        计算机要精准的存储和识别各种字符集符号，需要进行字符编码，一套字符集必然至少有一套字符编码.
+        常见字符集有:ASCII、GBK、Unicode等字符集
+        ![note9.png](note9.png)
+        可见，当指定了编码，它所对应的字符集自然就确定了，所以编码才是我们最重要关心的
+        记住:UTF-8中一个汉字占3个字节,GBK中一个汉字占2个字节
+    1.InputStreamReader
+        a.概述:是字节流通向字符流的桥梁->读数据
+        b.构造:
+            InputStreamReader(InputStream in,String charset)    charset:指定编码，不区分大小写
+        c.作用:可以指定编码，按照指定编码去读取内容
+        d.用法:基本用法与FileReader一样(FileReader继承了InputStreamReader)
+    2.OnputStreamWriter
+        a.概述:是字符流通向字节流的桥梁->写数据
+        b.构造:
+            OutputStreamWriter(OutputStream out,String charset)    charset:指定编码，不区分大小写
+        c.作用:可以指定编码，按照指定编码去存储数据
+        d.用法:基本用法与FileWriter一样(FileWriter继承了OutputStreamWriter)
+
+Note 11:序列化流与反序列化流
+    为什么要序列化:因为将一个对象实现序列化接口，将来才能让这个对象变成二进制文件在网络上传输
+    1.作用:读写对象(Object对象)
+    2.两个对象:
+        a.ObjectOutoutStream->序列化流->写对象
+        b.ObjectInputStream->反序列化流->读对象
+    3.注意:我们将对象序列化到文件中，打开文件我们看不懂很正常，我们只需将这些看不懂的内容成功读取回来即可
+        应用场景:游戏的英雄存档，退出时英雄变成对象，将人物的属性变成对象的成员变量，然后存到文件，等待下次打开游戏反序列化读取人物属性还原
+    ![note11_3.png](note11_3.png)
+    4.序列化流_ObjectOutoutStream
+        a.作用:写对象
+        b.构造:
+            ObjectOutputStream(OutputStream out)
+        c.方法:
+            void writeObject(Object object)     写对象
+        d.注意:想要将对象序列化到文件中，被序列化的对象需要实现Serializable接口
+    5.反序列化流_ObjectInputStream
+        a.作用:读对象
+        b.构造:
+            ObjectInputStream(InputStream in)
+        c.方法:
+            Object readObject()     读对象
+        d.注意:想要将对象序列化到文件中，被序列化的对象需要实现Serializable接口
+    6.如果不想对象的某个属性被序列化(了解)
+        将该属性有transient
+    7.反序列化时出现的问题以及分析和解决
+        a.问题描述:序列化之后，修改源码，修改后没有重新序列化，直接反序列化，就会出现序列号冲突问题:InvalidClassException
+            ![note11_7.png](note11_7.png)
+            解决:将序列号定死即可，后面不论怎么修改源码，序列号都是这一个
+            方法:在被序列化的对象加上一个public static final long serialVersionUID 的变量并
+                为其赋值只要这个值不变，JAVA就会认为类的版本一致
+        b.问题描述:循环读取的次数和存储对象的个数不对应，就会出现EOFException
+            解决:直接序列化一个对象的集合而非多个对象，于是反序列化一个集合就可以通过集合取出所有对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
