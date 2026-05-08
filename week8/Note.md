@@ -198,7 +198,7 @@ Note 9:字符缓冲流
         3.特有方法:
             String readLine()   一次读一行，如果读到结束标记，返回的是null,读取很方便
 
--------------第七章:转换流、序列化流、打印流_PrintStream(了解)-------------
+-------------第七章:转换流、序列化流、打印流_PrintStream(了解)、Properties集合-------------
 Note 10:转换流
     介绍:
         字符编码(Character Encoding):就是一套自然语言的字符与二进制数之间的对应规则.
@@ -257,9 +257,48 @@ Note 11:序列化流与反序列化流
         b.问题描述:循环读取的次数和存储对象的个数不对应，就会出现EOFException
             解决:直接序列化一个对象的集合而非多个对象，于是反序列化一个集合就可以通过集合取出所有对象
 
+Note 12:打印流
+    1.构造:PrintStream(String fileName)
+    2.方法:
+        a.println() 原样输出，自带换行
+        b.print()   原样输出，不带换行
+    3.改变流向
+        a.什么叫做改变流向:System.out.println()本身是输出到控制台上的
+            改变流向可以让输出语句从控制台上输出改为往指定文件中输出
+        b.方法:使用System中的方法:
+            static void setOut(PrintStream out) 改变流向，让输出从控制台转移到指定文件中
+    4.作用:将输出的语句可以永久保存到日志文件中
+    5.续写功能:另一个构造:PrintStream(OutputStream out),使用OutputStream的续写功能
 
-
-
+Note 13:Properties集合
+回顾:
+    1.概述:Properties继承自Hashtable
+    2.特点:
+        a.key唯一,value可重复
+        b.无索引
+        c.无序
+        d.线程安全
+        e.不能存null键值
+        f.Properties的key和value默认类型为String
+    3.数据结构:哈希表
+    4.方法:
+        Object setProperty(String key,String value)     存键值对
+        String getProperty(String key)                  根据key获取value
+        Set<String> stringPropertyNames()               获取所有key，存到set集合中，类似于keySet方法
+        void load(InputStream inStream)                 将流中的数据加载到Properties集合中
+    5.使用场景:配合配置文件使用
+    注意:将来我们很多硬数据不能放到源码中，比如用户密码等数据，因为将来可能会更改，而一更改就需要去源码中更改，且将来很多类与类之间
+        很多联系，有可能牵一发而动全身，所以需要将这些数据提取到文件中，改的时候直接去文件改而不必改源码
+    6.创建配置文件:***********************************
+        1.在模块下右键->file->取名为xxx.properties
+        2.在xxx.properties文件中写配置数据
+            a.key和value都是key=value形式
+            b.key和value都是String的，但是不要加双引号
+            c.每个键值对写完后，都要换行后才写下一对
+            d.键值对之间最好不要有空格(空格可以有，但是不建议)
+            e.键值对中建议不要写中文(中文可以有，但是直接读取会乱码，需要转换流转码)
+例如:
+![note13.png](note13.png)
 
 
 
