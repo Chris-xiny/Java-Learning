@@ -17,6 +17,7 @@ public class Hero implements Serializable {//实现序列化接口
         this.sex = sex;
     }
 
+
     public String getName() {
         return name;
     }

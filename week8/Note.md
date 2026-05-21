@@ -198,7 +198,7 @@ Note 9:字符缓冲流
         3.特有方法:
             String readLine()   一次读一行，如果读到结束标记，返回的是null,读取很方便
 
--------------第七章:转换流、序列化流、打印流_PrintStream(了解)、Properties集合-------------
+-------------第七章:转换流、序列化流、打印流_PrintStream(了解)、Properties集合、Commoms_IO工具类-------------------
 Note 10:转换流
     介绍:
         字符编码(Character Encoding):就是一套自然语言的字符与二进制数之间的对应规则.
@@ -300,6 +300,29 @@ Note 13:Properties集合
 例如:
 ![note13.png](note13.png)
 
+# Note 14:Commoms_IO工具类
+## 工具包的使用
+### IOUtils 类
+- 静态方法：`IOUtils.copy(InputStream in, OutputStream out)`  
+  传递字节流，实现文件复制。
+- 静态方法：`IOUtils.closeQuietly(任意流对象)`  
+  悄悄地释放资源，自动处理 `close()` 方法抛出的异常。
+- 
+### FileUtils 类
+
+- **静态方法：`FileUtils.copyDirectoryToDirectory(File src, File dest);`**
+  传递 `File` 类型的目录，进行整个目录的复制，自动进行递归遍历。
+    - 参数：
+        - `src`: 要复制的文件夹路径
+        - `dest`: 要将文件夹粘贴到哪里去
+
+- **静态方法：`writeStringToFile(File file, String str)`**
+  写字符串到文本文件中。
+
+- **静态方法：`String readFileToString(File file)`**
+  读取文本文件，返回字符串。
+# Note 15:快速记忆IO流与对应特有方法
+![img.png](img.png)
 
 
 
