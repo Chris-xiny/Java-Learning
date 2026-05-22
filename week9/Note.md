@@ -219,3 +219,54 @@ private static void method05() {
 ### 总结:
 - 构造私有
 - 对象私有,静态的，什么时候new对象就看懒汉还是饿汉
+
+
+# 第四章 Lombok
+## 基础信息
+1. **作用**：简化 `JavaBean` 开发
+2. **安装方法一**：
+    - a. 安装插件：IDEA 2022 及以上版本自带，无需额外下载
+    - b. 导入 Lombok 的 jar 包
+    - c. 修改 IDEA 相关设置
+      ![img.png](img.png)
+3. **安装方法二**：maven 添加依赖
+![img_1.png](img_1.png)
+---
+## 1. Lombok 介绍
+- Lombok 通过增加“处理程序”，让 `JavaBean` 开发变得更简洁、高效。
+- 它以注解形式简化 Java 代码，提升开发效率。日常开发中，`JavaBean` 常需手动编写 `getter/setter`、构造器、`equals` 等方法，还需维护这些代码。
+- Lombok 可通过注解，在编译阶段自动为属性生成构造器、`getter/setter`、`equals`、`hashcode`、`toString` 等方法。
+- 效果：源码中没有 `getter/setter` 方法，但编译后的字节码文件中会自动生成这些方法，省去手动编写和维护的麻烦，让代码更简洁。
+
+## 2. Lombok 常用注解
+
+### @Getter 和 @Setter
+- 作用：生成成员变量的 `get` 和 `set` 方法。
+- 写在成员变量上：仅对当前成员变量有效。
+- 写在类上：对类中所有成员变量有效。
+- 注意：静态成员变量无效。
+
+---
+
+### @ToString
+- 作用：生成 `toString()` 方法。
+- 注解只能写在类上。
+
+---
+
+### @NoArgsConstructor 和 @AllArgsConstructor
+- `@NoArgsConstructor`：生成无参数构造方法。
+- `@AllArgsConstructor`：生成满参数构造方法。
+- 注解只能写在类上。
+
+---
+
+### @EqualsAndHashCode
+- 作用：生成 `hashCode()` 和 `equals()` 方法。
+- 注解只能写在类上。
+
+---
+
+### @Data
+- 作用：自动生成 `get/set`、`toString`、`hashCode`、`equals` 方法，以及无参构造方法。
+- 注解只能写在类上。
