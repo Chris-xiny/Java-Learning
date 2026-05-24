@@ -103,29 +103,29 @@
 
 ### 3.1 获取所有public的构造方法
 1.  Class类中的方法：
-    ```java
+    ```
     Constructor<?>[] getConstructors()//获取类中所有public修饰的构造方法
     
     ```
 
-## 3.2 获取空参构造（public）
+### 3.2 获取空参构造（public）
 
 1. **Class类方法：获取指定public构造方法**
-```java
+```
     Constructor<T> getConstructor(Class<?>... parameterTypes);
 ```
 - parameterTypes：可变参数，可传 0 个或多个 
   - 获取空参构造：不写参数
   - 获取有参构造：传入参数类型的 Class 对象
 2. **Constructor 类方法：创建对象**
-```java
+```
     T newInstance(Object... initargs);
 ```
 - initargs：构造方法的实参
     - 无参构造：不写参数
     - 有参构造：传入对应实参
 - 示例
-```java
+```
 public class Demo04GetConstructor {
     public static void main(String[] args) throws Exception {
         // 1. 获取Class对象
@@ -144,9 +144,9 @@ public class Demo04GetConstructor {
 }   
 ```
 
-## 3.3 获取私有构造(暴力反射)
+### 3.3 获取私有构造(暴力反射)
 1. **Class类方法：获取所有构造方法(包括私有)**
-```java
+```
     Constructor<?>[] getDeclaredConstructors();//获取类中所有构造方法(包括私有)
     Constructor<T> getDeclaredConstructor(Class<?>... parameterTypes);//获取类中指定构造方法(私有也可以指定)
 ```
@@ -154,5 +154,117 @@ public class Demo04GetConstructor {
     - 获取空参构造：不写参数
     - 获取有参构造：传入参数类型的 Class 对象
 2. **暴力反射**:Constructor有一个父类叫做AccessibleObject,里面有个方法
-- void setAccessible(boolean flag)->修改访问权限(暴力反射)
-  - flag为true，接触私有权限
+- void setAccessible(boolean flag)->修改访问权限(修改后才能使用该构造)
+  - flag为true，解除私有权限
+
+## 4. 反射方法
+
+### 4.1 利用反射获取所有public成员方法
+- `Class`类方法：
+  ````
+  Method[] getMethods();//作用：获取当前类及所有父类中所有public修饰的成员方法。
+  //示例代码
+  private static void method01() {
+    Class<Person> aClass = Person.class;
+    Method[] methods = aClass.getMethods();
+    for (Method method : methods) {
+        System.out.println(method);
+    }
+  } 
+  ````
+
+### 4.2 反射获取指定 public 成员方法（有参 / 无参）
+- `Class`类方法：
+ ````
+    Method getMethod(String name, Class<?>... parameterTypes);
+    //name：要获取的方法名
+    //parameterTypes：方法参数类型的 Class 对象（无参方法可省略）
+
+````
+- **方法调用:** 成员方法对象.invoke(操作对象,方法参数),如果方法有返回值，则可以直接接收invoke的返回值,没有则null
+
+### 4.3 反射之操作私有成员方法
+1. **Class类方法：获取所有构造方法(包括私有)**
+```
+    Constructor<?>[] getDeclaredMethods();//获取类中所有成员方法(包括私有)
+    Constructor<T> getDeclaredMethod(String name,Class<?>... parameterTypes);//获取类中指定成员方法(私有也可以指定)
+```
+- parameterTypes：可变参数，可传 0 个或多个
+    - name：传递方法名
+    - 获取有参方法：传入方法参数的 class 对象
+2. **操作方法:** void setAccessible(boolean flag)->修改访问权限
+    - flag为true，解除私有权限
+3. **调用方法:**  invoke(类对象,方法参数);
+
+## 5. 反射成员变量
+### 5.1 获取所有属性（Java反射）
+
+- **Class类方法：**
+    1.  `Field[] getFields()`：获取类中所有 `public` 修饰的属性（成员变量）。
+    2.  `Field[] getDeclaredFields()`：获取类中**所有**属性，包括 `private`、`protected`、默认访问权限的属性。
+
+## 5.2 获取指定属性（Java反射）
+
+### 1. `Class`类中的方法
+1.  `Field getField(String name)`
+    作用：获取指定名称的`public`属性。
+2.  `Field getDeclaredField(String name)`
+    作用：获取指定名称的属性，包括`private`修饰的属性。
+
+### 2. `Field`类中的方法
+1.  `void set(Object obj, Object value)`
+    作用：为属性赋值，相当于JavaBean中的`set`方法。
+    - `obj`：要操作的对象
+    - `value`：要赋予的新值
+2.  `Object get(Object obj)`
+    作用：获取指定对象的属性值。
+    - `obj`：要操作的对象
+
+## 6. 反射练习（编写一个小框架）
+
+### 1. 定义接口
+```
+public interface 接口名 {
+    public Employee find();
+}
+```
+````
+<select id="find" resultType="Employee的全限定名">
+    select 列名 from 表名 where 条件
+</select>
+根据接口的Class对象，创建一个实现类对象，然后通过配置文件中的方法名反射这个方法，使用invoke执行这个方法。
+````
+---
+
+````
+需求:在配置文件中配置类的全限定名和方法名，通过解析配置文件，让配置好的方法自动执行。
+
+配置文件示例（config.properties）：
+className=包名.Person
+methodName=eat
+
+实现步骤:
+
+1. 创建配置文件
+   配置文件建议放在resources资源目录下，确保编译后能被打包到out目录中。(Maven在target目录)
+
+2. 读取并解析配置文件
+   加载配置文件，读取className和methodName。
+   a.如何读取配置文件?
+        直接new FileInputStream("模块名\\resources\\properties文件名")->不行,因为out目录下没有resources->相当于写死了
+   b.解决方法:用类加载器
+        ClassLoader classLoader=当前类.class.getClassLoader();
+        InputStream in=classLoader.getResourceAsStream("properties文件名");//自动扫描resources下的文件
+        
+   
+
+3. 根据解析出来的className创建Class对象
+   通过解析出的全限定类名，使用Class.forName(className)获取类的Class对象。
+
+4. 根据解析出来的methodName获取目标方法
+   通过解析出的方法名，使用getMethod(methodName)获取对应的Method对象。
+
+5. 执行方法
+   创建类的实例，并通过method.invoke()方法执行目标方法。
+````
+
