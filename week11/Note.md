@@ -268,3 +268,113 @@ methodName=eat
    创建类的实例，并通过method.invoke()方法执行目标方法。
 ````
 
+# 第四章.注解
+## 1.注解的介绍
+````
+1.引用数据类型：
+    类 数组 接口 枚举 注解
+
+1.jdk1.5版本的新特性->一个引用数据类型
+    和类，接口，枚举是同一个层次的
+    引用数据类型:类 数组 接口 枚举 注解
+
+2.作用：
+    说明:对代码进行说明,生成doc文档(API文档)
+    检查:检查代码是否符合条件 @Override(会用) @FunctionalInterface
+    分析:对代码进行分析,起到了代替配置文件的作用(会用)
+
+3.JDK中的注解：
+    @Override -> 检测此方法是否为重写方法
+    jdk1.5版本,支持父类的方法重写
+    jdk1.6版本,支持接口的方法重写
+    @Deprecated -> 方法已经过时,不推荐使用
+    调用方法的时候,方法上会有横线,但是能用
+    @SuppressWarnings->消除警告 @SuppressWarnings("all")
+````
+
+---
+
+## 2.注解的定义以及属性的定义格式
+````
+大家需要知道的是,咱们这里说的注解属性,其本质上是抽象方法,但是我们按照属性来理解,好理解,因为到时候使用注解的时候,需要用=为其赋值
+
+1. 定义：
+public @interface 注解名{
+}
+
+2. 定义属性：增强注解的作用
+数据类型 属性名() -> 此属性没有默认值，需要在使用注解的时候为其赋值
+数据类型 属性名() default 值 -> 此属性有默认值，如果有需要，还可以二次赋值
+
+3. 注解中能定义什么类型的属性呢？
+a. 8种基本类型
+b. String类型，class类型，枚举类型，注解类型
+c. 以及以上类型的一维数组
+````
+
+---
+
+## 3.注解的使用(重点)
+````
+1.注解的使用:
+说白了就是为注解中的属性赋值
+
+2.使用位置上:
+在类上使用,方法上使用,成员变量上使用,局部变量上使用,参数位置使用等
+
+3.使用格式:
+a.@注解名(属性名 = 值,属性名 = 值...)
+b.如果属性中有数组:
+@注解名(属性名 = {元素1,元素2...})
+````
+````
+注解注意事项：
+1. 空注解可以直接使用 -> 空注解就是注解中没有任何的属性
+2. 不同的位置可以使用一样的注解，但是同样的位置不能使用一样的注解
+3. 使用注解时，如果此注解中有属性，注解中的属性一定要赋值，如果有多个属性，用,隔开
+   如果注解中的属性有数组，使用{}
+4. 如果注解中的属性值有默认值，那么我们不必要写，也不用重新赋值，反之必须写上
+5. 如果注解中只有一个属性，并且属性名叫value，那么使用注解的时候，属性名不用写，直接写值（包括单个类型，还包括数组）
+````
+## 4.注解解析的方法->AnnotatedElement接口
+````
+注解的解析:说白了就是将注解中的属性值获取出来
+
+1.注解解析涉及到的接口:AnnotatedElement接口
+实现类: AccessibleObject, Class, Constructor, Executable, Field, Method, Package, Parameter
+
+2.解析思路:先判断指定位置上有没有使用指定的注解,如果有,获取指定的注解,获取注解中的属性值
+a.boolean isAnnotationPresent(Class<? extends Annotation> annotationClass)->判断指定位置上有没有指定的注解
+比如:判断BookShelf上有没有Book注解
+Class bookShelf = BookShelf.class
+bookShelf.isAnnotationPresent(Book.class)
+
+b.getAnnotation(Class<T> annotationClass) ->获取指定的注解,返回值类型为获取的注解类型
+比如:获取BookShelf上的Book注解
+Class bookShelf = BookShelf.class
+boolean result = bookShelf.isAnnotationPresent(Book.class)
+如果result为true,证明BookShelf上有Book注解,那就获取
+Book book = bookShelf.getAnnotation(Book.class)
+````
+````java
+public class test01 {
+    public static void main(String[] args) {
+        Class<BookShelf> bookShelf = BookShelf.class;
+        boolean flag = bookShelf.isAnnotationPresent(Book.class);
+        if (flag) {
+            Book book = bookShelf.getAnnotation(Book.class);
+            System.out.println(book.bookName());
+            System.out.println(Arrays.toString(book.author()));
+            System.out.println(book.price());
+            System.out.println(book.count());
+        }
+    }
+}
+/*
+以上代码没有解析出来:
+涛哥猜想:如果Book注解被加载到内存了,那么我们一定能判断出来BookShelf上有没有Book注解;
+但是现在没有判断出来,但是BookShelf上确实用了Book注解了,所以涛哥猜想,Book注解有可能就没有在内存中出现
+*/
+````
+
+
